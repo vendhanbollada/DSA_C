@@ -9,8 +9,7 @@
 
 int main ()
 {
-	char option, sub_opt;
-	bool ret_val;
+	char option;
 	int poppedVal, peekVal;
 	NODE *head = NULL;
 	char oStr [50], rStr [50];

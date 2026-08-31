@@ -37,8 +37,8 @@ NODE *CreateNode ()
 
 void CreateStack (NODE **pp_head)
 {
-	int num, val;
-	NODE *p_node, *p_temp, *p_head;
+	int num;
+	NODE *p_node,*p_head;
 
 	p_head = *pp_head;
 	printf ("How many items do you want to push?:");
@@ -47,8 +47,7 @@ void CreateStack (NODE **pp_head)
 	for (int i = 0; i < num; i ++)
 	{
 		p_node = CreateNode ();
-		if (p_head != NULL)
-			p_node -> next = p_head;
+		p_node -> next = p_head;
 		p_head = p_node;
 	}
 	*pp_head = p_head;
@@ -71,7 +70,8 @@ void push (NODE **pp_head)
 // pop will pop out the entry at the top of the list
 int pop (NODE **pp_head)
 {
-	DeleteLatestEntry (pp_head);
+	int ret_value = DeleteLatestEntry (pp_head);
+	return ret_value;
 }
 
 int peek (NODE **pp_head)
@@ -86,7 +86,25 @@ int peek (NODE **pp_head)
 	}
 	return lEntry;
 }
+/*
+#include <stdbool.h>
+#include <stdio.h>
 
+bool Peek(const NODE *p_head, int *out_data)
+{
+    // Check if the stack is empty
+    if (p_head == NULL) {
+        printf("Stack is empty: nothing to peek.\n");
+        return false;
+    }
+
+    // Safely output the top node's data without altering pointers
+    *out_data = p_head->data;
+    return true;
+}
+NOTE : this impemlemation return a bool and expects a pointer to an int;
+but prevent errors of considering special values;
+*/
 
 void InsertAtBeginning (NODE **pp_head)
 {
@@ -118,7 +136,23 @@ int DeleteLatestEntry (NODE **pp_head)
 	*pp_head = p_head;
 	return lEntry;
 }
+/*
+bool DeleteLatestEntry(NODE **pp_head, int *out_data)
+{
+    if (pp_head == NULL || *pp_head == NULL) {
+        printf("Stack underflow: nothing to delete.\n");
+        return false;
+    }
 
+    NODE *p_temp = *pp_head;
+    *out_data = p_temp->data;
+    *pp_head = p_temp->next;
+    
+    free(p_temp);
+    return true;
+}
+better implentaition counter acts and allows user to stores values that are considered as boundary conditions
+*/
 
 bool IsStackEmpty (NODE *p_head)
 {
@@ -132,20 +166,22 @@ bool IsStackEmpty (NODE *p_head)
 // Free the memory taken up by the whole list
 void FreeStack(NODE **pp_head)
 {
-    	NODE *current = *pp_head;
-    	NODE *nextNode;
-    	while (current != NULL)
-    	{
-			nextNode = current->next;
-        	free(current);
-        	current = nextNode;
-    	}
-    	*pp_head=NULL;
+	if (pp_head == NULL) {
+    return;
+    }
+	NODE *current = *pp_head;
+	NODE *nextNode;
+	while (current != NULL)
+	{
+		nextNode = current->next;
+		free(current);
+		current = nextNode;
+	}
+*pp_head=NULL;
 }
 
 /*
-
-Incomplete implementation
+have an error in this;
 void reverseWord (NODE *head, char *inStr, char *outStr)
 {
 	int slen = strlen (inStr);
@@ -159,5 +195,4 @@ void reverseWord (NODE *head, char *inStr, char *outStr)
 	outStr [count] = '\0';
 	
 	printf ("The reversed string is %s\n", outStr);
-}
-*/
+}*/
