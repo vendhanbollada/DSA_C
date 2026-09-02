@@ -256,3 +256,87 @@ void FreeList(NODE **head)
         *head = temp;
     }
 }
+
+bool SearchList(NODE *head)
+{
+    if (head == NULL)
+    {
+        printf("List is empty, nothing to search.\n");
+        return false;
+    }
+
+    int target;
+    printf("Enter the value you want to find: ");
+    if (scanf("%d", &target) != 1)
+    {
+        printf("Invalid input.\n");
+        return false;
+    }
+
+    // Traverse until the pointer itself runs off the end (becomes NULL)
+    for (NODE *pTemp = head; pTemp != NULL; pTemp = pTemp->next)
+    {
+        if (pTemp->data == target)
+        {
+            return true; // Match found
+        }
+    }
+
+    return false; // Traversed the entire list, value not found
+}
+
+void ModifyList(NODE **head){
+    if(head == NULL)
+    {
+        printf("List is empty, nothing to search.\n");
+        return ;
+    }
+
+    int target;
+    printf("Enter the value you want to find: ");
+    if (scanf("%d", &target) != 1)
+    {
+        printf("Invalid input.\n");
+        return ;
+    }
+
+    // Traverse until the pointer itself runs off the end (becomes NULL)
+    for (NODE *pTemp = head; pTemp != NULL; pTemp = pTemp->next)
+    {
+        if (pTemp->data == target)
+        {
+            int value;
+            printf("enter the changed value");
+             if (scanf("%d", &value) != 1)
+                {
+                    printf("Invalid input.\n");
+                    return;
+                }else{
+                    pTemp->data = value;
+                    printf("Value updated successfully.\n");
+                    return;
+                }
+        }
+    }
+    printf("Value %d not found in the list.\n", target);
+}
+
+void Navigate(NODE **head , NODE **tail){
+    char option;
+    printf("enter the F = forward , B = Backwards , Q = quit");
+    if(scanf("%c" , &value) != 1){
+        printf("Invalid input");
+        return;
+    }
+    NODE *current = *head;
+    switch(toupper(option)){
+        case "f":
+
+
+        case "b":
+
+
+        case "q";
+    }
+
+}
