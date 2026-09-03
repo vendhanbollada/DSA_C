@@ -321,22 +321,59 @@ void ModifyList(NODE **head){
     printf("Value %d not found in the list.\n", target);
 }
 
-void Navigate(NODE **head , NODE **tail){
-    char option;
-    printf("enter the F = forward , B = Backwards , Q = quit");
-    if(scanf("%c" , &value) != 1){
-        printf("Invalid input");
+void Navigate(NODE *head)
+{
+    if (head == NULL)
+    {
+        printf("List is empty, nothing to navigate.\n");
         return;
     }
-    NODE *current = *head;
-    switch(toupper(option)){
-        case "f":
 
+    NODE *pCurrent = head;
+    char cmd;
 
-        case "b":
+    while (1)
+    {
+        printf("\n--- Current Node: [%d] ---\n", pCurrent->data);
+        printf("[F]orward | [B]ackward | [Q]uit\nCommand: ");
+        
+        if (scanf(" %c", &cmd) != 1)
+        {
+            break;
+        }
 
+        switch (toupper((unsigned char)cmd))
+        {
+            case 'F':
+                if (pCurrent->next != NULL)
+                {
+                    pCurrent = pCurrent->next;
+                }
+                else
+                {
+                    printf("Already at TAIL. Cannot move forward.\n");
+                }
+                break;
 
-        case "q";
+            case 'B':
+                if (pCurrent->prev != NULL)
+                {
+                    pCurrent = pCurrent->prev;
+                }
+                else
+                {
+                    printf("Already at HEAD. Cannot move backward.\n");
+                }
+                break;
+
+            case 'Q':
+                printf("Exiting navigation.\n");
+                return;
+
+            default:
+                printf("Invalid command. Use F, B, or Q.\n");
+                break;
+        }
     }
-
 }
+
