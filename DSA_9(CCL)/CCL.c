@@ -2,6 +2,7 @@
 #include<stdio.h>
 #include<string.h>
 #include"CircularList2.h"
+#include<ctype,h>
 
 NODE *CreateNode()
 {
@@ -74,12 +75,6 @@ void InsertAtEnd(NODE ** head , NODE ** tail){
         pNode->next = *head;
         *tail =pNode;
     }
-}
-
-void InsertAnywhere(NODE** head , NODE** tail){
-    for(*head = pTemp ; pNode = *tail ; pTemp = pTemp->next);
-    printf("enter the location of ");
-    NODE* pNode;
 }
 
 void DeleteFirstNode(NODE ** head , NODE ** tail){
@@ -204,4 +199,105 @@ void InsertAnywhere(NODE **head, NODE **tail)
     NODE *pNode = CreateNode();
     pNode->next = pTemp->next;
     pTemp->next = pNode;
+}
+
+void DeleteAnyNode(NODE **head , NODE** tail){
+    if(*head == NULL){
+        printf("the list is empty nothing to delete");
+        return;
+    }
+    int pos;
+    printf("enter the location of the node");
+    if(scanf("%d" , &pos) != 1 || pos < 1 ){
+        printf("invalid input");
+    }
+    if(pos == 1){
+        DeleteFirstNode(head , tail);
+        return;
+    }
+    NODE *pTemp = *head;
+    for (int i = 1; i < pos - 1; i++)
+    {
+        pTemp = pTemp->next;
+        // If we wrapped back around to head, pos exceeds length + 1
+        if (pTemp == *head)
+        {
+            printf("Position out of range\n");
+            return;
+        }
+    }
+    if(pTemp == *tail){
+        DeleteAnyNode(head , tail);
+    }
+    fTemp = pTemp->next;
+    free(pTemp->next);
+    fTemp = pTemp->next->next;
+pTemp = NULL;
+}
+
+bool SearchList(NODE *head){
+    if(head == NULL){
+        printf("The list is empty");
+        return false;
+    }
+    int target;
+    printf("enter the value to be scearch");
+    if(scanf("%d" , &target) != 1){
+        printf("invalid Input");
+        return false;
+    }
+    NODE * pTemp;
+    
+    if(head->data == target) {
+    printf("It exists\n");
+    return true;
+    }
+
+    for(pTemp = head->next ; pTemp != head ; pTemp = pTemp->next ){
+        if(pTemp->data == target){
+            printf("It exists");
+            return true;
+        }
+    }
+printf("It doesnt exist")
+return false;
+}
+//better pratice;
+/*
+NODE *pTemp = head;
+do {
+    if (pTemp->data == target) {
+        printf("It exists\n");
+        return true;
+    }
+    pTemp = pTemp->next;
+} while (pTemp != head);
+
+printf("It does not exist\n");
+return false;
+
+*/
+
+void Navigate(NODE * head , NODE * tail){
+    char option;
+    printf("Enter M - foward , Q - quit");
+    if(scanf("%c" , &option) != -1){
+        printf("invalid input");
+        return;
+    }
+NODE* pNODE = head ;
+while(true){
+    switch(toupper(option)){
+        case 'M':
+            if(pNode == tail){
+                printf("reached at the end of the list , unit will keep repeating");
+                return;
+            }
+            printf("%d" , pNODE->data);
+            pNODE = pNODE->next;
+        case 'Q':
+        printf("thanks")
+            return
+    }
+}
 }
