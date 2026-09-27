@@ -27,8 +27,8 @@ NODE *CreateList (NODE *head){
         }
         else{
             for(p_temp=head;p_temp->next!=NULL;p_temp=p_temp->next){
-                p_temp->next=p_node;
             }
+            p_temp->next=p_node;
         }
     }
     return head;
