@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "BST_Implement.h"
-
+ 
 //function to create a node
 NODE* new_node(int x) 
 {
