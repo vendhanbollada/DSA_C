@@ -4,6 +4,7 @@
 #include <string.h>
 #include <ctype.h>
 #include <stdbool.h>
+#include<EvaluateExpTree.h">
 
 // Function to check if a character is an operator
 bool isOperator(char ch) 
